@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Command Query Separation (CQS)</Title>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Authors>BriareosTM</Authors>
     <Company>BStorm / Cognitic</Company>
     <Description>Implémentation simple du CQS avec Dispatcher utilisé dans les formations demandeurs d'emploi</Description>
@@ -14,6 +14,14 @@
     <RepositoryUrl>https://github.com/TMCognitic/BStorm.Tools.CommandQuerySeparation</RepositoryUrl>
     <PackageTags>bstorm; cqs</PackageTags>
     <PackageProjectUrl>https://github.com/TMCognitic/BStorm.Tools.CommandQuerySeparation</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
