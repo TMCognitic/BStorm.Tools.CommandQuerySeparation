@@ -1,7 +1,8 @@
 ﻿using BStorm.Tools.CommandQuerySeparation.Commands;
 using BStorm.Tools.CommandQuerySeparation.Queries;
+using BStorm.Tools.CommandQuerySeparation.Results;
 
-namespace BStorm.Tools.CommandQuerySeparation
+namespace BStorm.Tools.CommandQuerySeparation.Dispatching
 {
     public class Dispatcher : IDispatcher
     {
@@ -12,7 +13,7 @@ namespace BStorm.Tools.CommandQuerySeparation
             _serviceProvider = serviceProvider;
         }
 
-        public ICommandResult Dispatch(ICommandDefinition command)
+        public IResult Dispatch(ICommandDefinition command)
         {
             Type commandHandlerType = typeof(ICommandHandler<>);
             Type concreteCommandHandlerType = commandHandlerType.MakeGenericType(command.GetType());
@@ -27,7 +28,7 @@ namespace BStorm.Tools.CommandQuerySeparation
             return handler.Execute((dynamic)command);
         }
 
-        public async ValueTask<ICommandResult> DispatchAsync(ICommandDefinition command)
+        public async ValueTask<IResult> DispatchAsync(ICommandDefinition command)
         {
             Type commandHandlerType = typeof(ICommandAsyncHandler<>);
             Type concreteCommandHandlerType = commandHandlerType.MakeGenericType(command.GetType());
@@ -42,7 +43,7 @@ namespace BStorm.Tools.CommandQuerySeparation
             return await handler.ExecuteAsync((dynamic)command);
         }
 
-        public IQueryResult<TResult> Dispatch<TResult>(IQueryDefinition<TResult> query)
+        public IResult<TResult> Dispatch<TResult>(IQueryDefinition<TResult> query)
         {
             Type queryHandlerType = typeof(IQueryHandler<,>);
             Type concreteQueryHandlerType = queryHandlerType.MakeGenericType(query.GetType(), typeof(TResult));
@@ -55,9 +56,9 @@ namespace BStorm.Tools.CommandQuerySeparation
             }
 
             return handler.Execute((dynamic)query);
-        }        
+        }
 
-        public async ValueTask<IQueryResult<TResult>> DispatchAsync<TResult>(IQueryDefinition<TResult> query)
+        public async ValueTask<IResult<TResult>> DispatchAsync<TResult>(IQueryDefinition<TResult> query)
         {
             Type queryHandlerType = typeof(IQueryAsyncHandler<,>);
             Type concreteQueryHandlerType = queryHandlerType.MakeGenericType(query.GetType(), typeof(TResult));
