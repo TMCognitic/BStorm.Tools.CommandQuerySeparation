@@ -1,6 +1,4 @@
-﻿using BStorm.Tools.CommandQuerySeparation.Queries;
-
-namespace BStorm.Tools.CommandQuerySeparation.Results
+﻿namespace BStorm.Tools.CommandQuerySeparation.Results
 {
     public interface IResult : IResultBase
     {
