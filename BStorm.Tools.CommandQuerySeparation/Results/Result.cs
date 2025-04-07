@@ -1,6 +1,6 @@
 ﻿namespace BStorm.Tools.CommandQuerySeparation.Results
 {
-    internal class Result : IResult
+    internal class Result : ICommandResult
     {
         public bool IsSuccess
         {
@@ -20,7 +20,12 @@
             get;
         }
 
-        public Exception? Exception
+        public string? ExceptionMessage
+        {
+            get;
+        }
+
+        public string? ExceptionType
         {
             get;
         }
@@ -29,11 +34,12 @@
         {
             IsSuccess = isSuccess;
             ErrorMessage = errorMessage;
-            Exception = exception;
+            ExceptionMessage = exception?.Message;
+            ExceptionType = exception?.GetType().FullName;
         }
     }
 
-    internal class Result<TResult> : IResult<TResult>
+    internal class Result<TResult> : IQueryResult<TResult>
     {
         private readonly TResult? _content;
 
@@ -55,11 +61,6 @@
             get;
         }
 
-        public Exception? Exception
-        {
-            get;
-        }
-
         public TResult? Content
         {
             get
@@ -71,12 +72,23 @@
             }
         }
 
+        public string? ExceptionMessage
+        {
+            get;
+        }
+
+        public string? ExceptionType
+        {
+            get;
+        }
+
         internal Result(bool isSuccess, TResult? content, string? errorMessage = null, Exception? exception = null)
         {
             IsSuccess = isSuccess;
             _content = content;
             ErrorMessage = errorMessage;
-            Exception = exception;
+            ExceptionMessage = exception?.Message;
+            ExceptionType = exception?.GetType().FullName;
         }
     }
 }

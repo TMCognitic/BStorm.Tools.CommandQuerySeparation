@@ -13,7 +13,7 @@ namespace BStorm.Tools.CommandQuerySeparation.Dispatching
             _serviceProvider = serviceProvider;
         }
 
-        public IResult Dispatch(ICommandDefinition command)
+        public ICommandResult Dispatch(ICommandDefinition command)
         {
             Type commandHandlerType = typeof(ICommandHandler<>);
             Type concreteCommandHandlerType = commandHandlerType.MakeGenericType(command.GetType());
@@ -28,7 +28,7 @@ namespace BStorm.Tools.CommandQuerySeparation.Dispatching
             return handler.Execute((dynamic)command);
         }
 
-        public async ValueTask<IResult> DispatchAsync(ICommandDefinition command)
+        public async ValueTask<ICommandResult> DispatchAsync(ICommandDefinition command)
         {
             Type commandHandlerType = typeof(ICommandAsyncHandler<>);
             Type concreteCommandHandlerType = commandHandlerType.MakeGenericType(command.GetType());
@@ -43,7 +43,7 @@ namespace BStorm.Tools.CommandQuerySeparation.Dispatching
             return await handler.ExecuteAsync((dynamic)command);
         }
 
-        public IResult<TResult> Dispatch<TResult>(IQueryDefinition<TResult> query)
+        public IQueryResult<TResult> Dispatch<TResult>(IQueryDefinition<TResult> query)
         {
             Type queryHandlerType = typeof(IQueryHandler<,>);
             Type concreteQueryHandlerType = queryHandlerType.MakeGenericType(query.GetType(), typeof(TResult));
@@ -58,7 +58,7 @@ namespace BStorm.Tools.CommandQuerySeparation.Dispatching
             return handler.Execute((dynamic)query);
         }
 
-        public async ValueTask<IResult<TResult>> DispatchAsync<TResult>(IQueryDefinition<TResult> query)
+        public async ValueTask<IQueryResult<TResult>> DispatchAsync<TResult>(IQueryDefinition<TResult> query)
         {
             Type queryHandlerType = typeof(IQueryAsyncHandler<,>);
             Type concreteQueryHandlerType = queryHandlerType.MakeGenericType(query.GetType(), typeof(TResult));

@@ -5,6 +5,6 @@ namespace BStorm.Tools.CommandQuerySeparation.Commands
     public interface ICommandHandler<TCommand>
         where TCommand : ICommandDefinition
     {
-        IResult Execute(TCommand command);
+        ICommandResult Execute(TCommand command);
     }
 }
