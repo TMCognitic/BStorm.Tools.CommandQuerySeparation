@@ -2,9 +2,9 @@
 
 namespace BStorm.Tools.CommandQuerySeparation.Queries
 {
-    public interface IQueryAsyncHandler<TQuery, TResult>
+    public interface IAsyncQueryHandler<TQuery, TResult>
         where TQuery : IQueryDefinition<TResult>
     {
-        ValueTask<IQueryResult<TResult>> ExecuteAsync(TQuery query);
+        ValueTask<ICqsResult<TResult>> ExecuteAsync(TQuery query);
     }
 }

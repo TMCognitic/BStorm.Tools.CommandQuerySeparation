@@ -2,9 +2,9 @@
 
 namespace BStorm.Tools.CommandQuerySeparation.Commands
 {
-    public interface ICommandAsyncHandler<TCommand>
+    public interface IAsyncCommandHandler<TCommand>
         where TCommand : ICommandDefinition
     {
-        ValueTask<ICommandResult> ExecuteAsync(TCommand command);
+        ValueTask<ICqsResult> ExecuteAsync(TCommand command);
     }
 }

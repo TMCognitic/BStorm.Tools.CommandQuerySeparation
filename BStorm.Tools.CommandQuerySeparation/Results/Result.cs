@@ -1,6 +1,6 @@
 ﻿namespace BStorm.Tools.CommandQuerySeparation.Results
 {
-    internal class Result : ICommandResult
+    internal class Result : ICqsResult
     {
         public bool IsSuccess
         {
@@ -39,7 +39,7 @@
         }
     }
 
-    internal class Result<TResult> : IQueryResult<TResult>
+    internal class Result<TResult> : ICqsResult<TResult>
     {
         private readonly TResult? _content;
 
